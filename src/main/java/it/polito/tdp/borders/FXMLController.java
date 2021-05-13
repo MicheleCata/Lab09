@@ -30,7 +30,7 @@ public class FXMLController {
     private TextField txtAnno; // Value injected by FXMLLoader
 
     @FXML
-    private ComboBox<String> cmbStato;
+    private ComboBox<Country> cmbStato;
    
     @FXML // fx:id="txtResult"
     private TextArea txtResult; // Value injected by FXMLLoader
@@ -62,19 +62,29 @@ public class FXMLController {
     	
     	txtResult.appendText("Componenti connesse "+ model.getNConnessioni());
     	
-    	List<String> stati = new LinkedList<>();
+    	/*List<String> stati = new LinkedList<>();
     	for (Country c: model.getCountries()) {
     		stati.add(c.getNome());
-    	}
+    	}*/
     	
     	
-    	this.cmbStato.getItems().addAll(stati);
+    	this.cmbStato.getItems().addAll(model.getCountries());
 
     }
     
     @FXML
     void doStatiRaggiugibili(ActionEvent event) {
-
+    	txtResult.clear();
+    	Country stato = cmbStato.getValue();
+    	if (stato ==null) {
+    		txtResult.setText("SELEZIONA UNO STATO");
+    	}
+    	List<Country> statiRaggiungibili = model.trovaStati2(stato);
+    	int count = statiRaggiungibili.size();
+    	for (Country c: statiRaggiungibili) {
+    		txtResult.appendText(c+" ");
+    	}
+    	txtResult.appendText(count+"\n");
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

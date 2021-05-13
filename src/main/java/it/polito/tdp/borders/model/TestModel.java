@@ -20,6 +20,10 @@ public class TestModel {
 //		for (Country country : stats.keySet())
 //			System.out.format("%s %d\n", country, stats.get(country));		
 		
+        List<Country> statiRaggiungibili = model.trovaStati2(model.getCountries().get(8));
+        int count = statiRaggiungibili.size();
+        System.out.println(count);
+	
 	}
 
 }
